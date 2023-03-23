@@ -28,7 +28,7 @@ function visitNode(node: ts.Node, program: ts.Program): ts.Node | undefined {
     return createArrayExpression([]);
   }
   const type = typeChecker.getTypeFromTypeNode(node.typeArguments[0]);
-  const properties = typeChecker.getPropertiesOfType(type).filter(p => !(p.getFlags() === 8192 || p.name.startsWith('#')));
+  const properties = typeChecker.getPropertiesOfType(type).filter(p => !p.name.startsWith('#'));
   return createArrayExpression(properties.map(property => createStringLiteral(property.name)));
 }
 
